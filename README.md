@@ -1,6 +1,6 @@
 # Alphabet Tracing 2D
 
-This is a 2D gameto trace letters of the alphabet.
+This is a 2D game for tracing English letters.
 
 ## Built With
 
