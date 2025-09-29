@@ -1,5 +1,0 @@
-# Ignore Unity folders for language statistics
-Library/* linguist-vendored
-Packages/* linguist-vendored
-ProjectSettings/* linguist-vendored
-UserSettings/* linguist-vendored
