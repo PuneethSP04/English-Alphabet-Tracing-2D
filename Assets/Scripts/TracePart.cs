@@ -27,6 +27,7 @@ public class TracePart : MonoBehaviour
     // This sound plays if the player makes a mistake and the trace resets.
     [SerializeField] private AudioClip m_TraceResetSound;
 
+
     // This is an event that we trigger when this part is completed.
     // The LetterController listens to this to know when to activate the next part.
     [Header("Events")]
@@ -36,12 +37,13 @@ public class TracePart : MonoBehaviour
     private List<Waypoint> m_Waypoints;
     // This keeps track of the next waypoint the player needs to reach.
     private int m_CurrentWaypointIndex;
-    // This is how close the mouse has to be to a waypoint to "collect" it.
-    private const float WAYPOINT_THRESHOLD = 0.1f;
+    // This is how close the mouse has to be to a waypoint to "collect" it. It's adjustable in the Inspector.
+    [SerializeField] private float m_WaypointThreshold = 0.5f;
     // A simple flag to know if the player is currently dragging the mouse to trace.
     private bool m_IsTracing;
     // We need a reference to the main camera to convert mouse screen position to world position.
     private Camera m_MainCamera;
+    public int score = 0;
 
     // A property to check if this part has been completed. Other scripts can read this.
     public bool IsCompleted { get; private set; }
@@ -135,7 +137,7 @@ public class TracePart : MonoBehaviour
         if (m_CurrentWaypointIndex < m_Waypoints.Count)
         {
             // If the mouse is close enough to the current waypoint...
-            if (Vector2.Distance(mousePosition, m_Waypoints[m_CurrentWaypointIndex].transform.position) < WAYPOINT_THRESHOLD)
+            if (Vector2.Distance(mousePosition, m_Waypoints[m_CurrentWaypointIndex].transform.position) < m_WaypointThreshold)
             {
                 // ...we move on to the next waypoint.
                 m_CurrentWaypointIndex++;

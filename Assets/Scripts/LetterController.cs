@@ -18,11 +18,18 @@ public class LetterController : MonoBehaviour
     // This keeps track of which part of the letter we are currently tracing.
     // It starts at 0, which is the first part in our list.
     private int m_CurrentPartIndex = 0;
-
+    public TMPro.TMP_Text scoreText;
+    public int score = 0;
     // Start is called just before the first frame update.
     void Start()
     {
         InitializeLetter();
+    }
+
+    public void UpdateScoreText(int increment)
+    {
+        score += increment;
+        scoreText.text = "Score: " + score;
     }
 
     // This function sets up the letter at the beginning.
@@ -70,12 +77,14 @@ public class LetterController : MonoBehaviour
     {
         // We move to the next part in our list.
         m_CurrentPartIndex++;
+        UpdateScoreText(5);
         // If we have finished all the parts...
         if (m_CurrentPartIndex >= m_TraceParts.Count)
         {
             // ...the whole letter is complete! We trigger the 'OnLetterCompleted' event.
             Debug.Log("Letter Completed!");
             OnLetterCompleted.Invoke();
+            UpdateScoreText(10);
         }
         else
         {

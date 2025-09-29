@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     // We can drag our UI panel to this slot in the Inspector.
     [SerializeField] private GameObject m_WinPanel;
 
+    [SerializeField] private TMPro.TMP_Text Notifiy_BonusAdded;
+
     // This section is for sounds.
     [Header("Audio")]
     // This is the sound that plays when the whole letter is finished. A "success" or "congratulations" sound.
@@ -46,6 +48,11 @@ public class GameManager : MonoBehaviour
             m_WinPanel.SetActive(false);
         }
 
+        if (Notifiy_BonusAdded != null)
+        {
+            Notifiy_BonusAdded.text = "";
+        }
+
         // This gets the AudioSource component that is on the same GameObject as this script.
         // The [RequireComponent] line at the top makes sure it's there.
         m_AudioSource = GetComponent<AudioSource>();
@@ -58,7 +65,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager: Letter completed! Showing Win Panel.");
         // If we have a win panel assigned, we make it visible.
         if (m_WinPanel != null)
+        {
             m_WinPanel.SetActive(true);
+        }
+
+        if (Notifiy_BonusAdded != null)
+        {
+            Notifiy_BonusAdded.text = "Bonus +10!";
+        }
 
         // If we have assigned a completion sound and we have our AudioSource, we play the sound.
         // 'PlayOneShot' is good for sound effects that don't need to loop.
